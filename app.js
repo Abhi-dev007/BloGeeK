@@ -9,6 +9,8 @@ const expressSanitizer=require("express-sanitizer");
 const flash = require('connect-flash');
 const session= require('express-session');
 const passport= require('passport');
+const nodemailer = require("nodemailer");
+const uuid = require("uuid");
 const LocalStrategy=require('passport-local');
 
 app.engine('ejs', ejsMate)
@@ -71,13 +73,17 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-const ExpressError=class ExpressError extends Error {
-    constructor(message, statusCode) {
-        super();
-        this.message = message;
-        this.statusCode = statusCode;
+let secKey="";
+let userResetPassword;
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    auth: {
+        user: 'guy.littel60@ethereal.email',
+        pass: 'gx4mH2FxA47WGJKz2j'
     }
-}
+});
 
 const catchAsync=func => {
     return (req, res, next) => {
@@ -117,7 +123,6 @@ app.post('/register', catchAsync(async (req,res)=>{
         const {email,username,password} = req.body;
         const user= new User({email,username});
         const registeredUser= await User.register(user,password);
-        // console.log(user.email);
         req.login(registeredUser,err=>{
             if(err) return next(err);
             
@@ -155,21 +160,56 @@ app.post('/changePassword', function (req, res) {
                 res.redirect('/login')
             }
             else{
-                user.setPassword( req.body.newpassword, function(err, users)  { 
-                    User.updateOne({ _id: users._id },{ hash: users.hash, salt: users.salt }, (err,result) => {
-                        if (err) {
-                            req.flash('error', 'An error occurred, Try Again....')
-                            res.redirect('/login')
-                        } else {
-                            req.flash('success', 'Password Changed Successfully....')
-                            res.redirect('/login')
-                        }
-                    })
-                }) 
+                try{
+                    secKey = uuid.v4();
+                    let info = transporter.sendMail({
+                        from: '"BloGeeK" <guy.littel60@ethereal.email>', // sender address
+                        to: user.email, // list of receivers
+                        subject: "Password Reset", // Subject line
+                        text: "Hello, the security key for resetting your password is: " + secKey + "\n Thank You!", // plain text body
+                    });
+                    userResetPassword = {
+                        user : user,
+                        newpassword: req.body.newpassword
+                    }
+                    res.redirect("/verifyAccount")
+                    
+                } catch(e){
+                    req.flash('error', 'Unable to send verification email, Try Again....')
+                    res.redirect('/login')
+                }
+                
             }})
     }
     
  });
+
+
+app.get('/verifyAccount', function(req, res){
+    res.render('verifyAccount.ejs')
+})
+
+
+app.post('/verifyAccount', function(req, res){
+    if(req.body.secKey == secKey){
+        userResetPassword.user.setPassword( userResetPassword.newpassword, function(err, users)  { 
+            User.updateOne({ _id: users._id },{ hash: users.hash, salt: users.salt }, (err,result) => {
+                if (err) {
+                    req.flash('error', 'An error occurred, Try Again....')
+                    res.redirect('/login')
+                } else {
+                    req.flash('success', 'Password Changed Successfully....')
+                    res.redirect('/login')
+                }
+            })
+        }) 
+    }
+    else{
+        req.flash('error','Security key entered is wrong');
+        res.redirect('/login');
+    }
+})
+
 
 app.get('/logout',(req,res)=>{
     req.logout();
@@ -198,12 +238,6 @@ app.get("/read",function(req,res){
         }
     })
     
-
-    // Blog.find({},function(err, Blog){
-    //     if(err) console.log(err);
-    //     else            
-    //         res.render("read.ejs",{Blog: Blog});
-    //     })   
 })
 
 
@@ -238,11 +272,7 @@ app.get("/create",function(req,res){
         req.flash('error', 'login/Signup to create your own Blogs....');
     }
     res.render('createBlog');
-    // Blog.find({author: req.currentUser},function(err,Blog){
-    //     if(err) console.log(err);
-    //     else            
-    //         res.render("myBlogs.ejs",{Blog:Blog});
-    //     })   
+     
 })
 
 app.post("/create", function(req, res){
