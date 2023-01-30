@@ -18,7 +18,7 @@
                         <div class="card-body">
                           <h3 class="card-title"><%=blog.title%></h3>
                           <h5 class="card-text"><i>Posted on <%=blog.createdAt.toDateString()%></i></h5>
-                          <a href="/view/<%=blog._id%>" class="btn btn-primary">open</a>
+                          <a href="/view/<%=blog._id%>" class="btn btn-primary">Open</a>
                           <a href="/edit/<%=blog._id%>" class="btn btn-danger">Edit</a>
                         <a href="/delete/<%=blog._id%>" class="btn btn-warning">Delete</a>
                         </div>
@@ -30,13 +30,13 @@
         <div class="d-flex">
             <div class="mr-auto">
                 <% if(PageData.currentPage > 0) {%>
-                    <a href="/read?page=<%=PageData.currentPage - 1%>" class="btn btn-primary m-2 p-2">Prev</a>
+                    <a href="/myBlogs?page=<%=PageData.currentPage - 1%>" class="btn btn-primary m-2 p-2">Prev</a>
                 <% } %>
             </div>
             
             <div class="">
                 <% if(PageData.currentPage + 1 < PageData.totalPages) { %>
-                    <a href="/read?page=<%=PageData.currentPage + 1%>" class="btn btn-primary m-2 p-2">Next</a>
+                    <a href="/myBlogs?page=<%=PageData.currentPage + 1%>" class="btn btn-primary m-2 p-2">Next</a>
                 <% } %>
             </div>
             
