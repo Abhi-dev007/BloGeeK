@@ -92,7 +92,7 @@ app.use((req, res, next) => {
 })
 
 const getPagination = (page) => {
-    const limit = 1;
+    const limit = 10;
     const offset = page ? page * limit : 0;
   
     return { limit, offset };
