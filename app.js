@@ -22,7 +22,8 @@ app.use(express.static("public"));
 const {ObjectId} = require('mongodb');
 
 const MongoDBStore = require("connect-mongo")(session);
-const dbUrl = 'mongodb://localhost/Blogeek';
+// const dbUrl = 'mongodb://localhost/Blogeek';
+const dbUrl = 'mongodb+srv://noobabhi:abhishek@cluster0.k4cdjwr.mongodb.net/?retryWrites=true&w=majority';
 Mongoose.connect(dbUrl,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
