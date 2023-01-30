@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,500;0,600;0,700;1,300&display=swap');
+
+
+/*NAVBAR*/
+.navbar {
+	background-color: white;	
+	padding: 0;
+	color: black;
+	border-bottom: 0.07em solid rgba(0,0,0,.2); 
+
+}
+
+.navbar-brand {
+	font: 1.7rem 'Inconsolata', monospace;
+	font-weight: 700 !important;
+}
+
+.navbar .nav-link {
+	font-weight: 400 !important;
+	margin: 0 !important;
+}
+
+@media (min-width: 900px) {
+	.navbar .nav-link:hover {
+		font-weight: 600 !important;
+		background: black;		
+		margin: 0 !important;
+		padding-left: 0;
+	}
+}
+
+@media (max-width: 900px) {
+	.navbar .nav-link:hover {
+		font-weight: bold !important;
+	}
+}
+
+	
+ul .nav-item {
+	font-size: 1.12rem;
+	font-weight: 500;
+	margin: 0;
+}
+
+.navbar .btn {
+	margin: 2em 0 0 2em;
+	font-size: 1rem;
+	transition-property: transform; 
+	transition-duration: 0.2s;
+	transition-delay: 0.03s
+}
+
+@media (max-width: 900px) {
+	
+	.navbar .btn {
+		margin: 2em 0 0 2em;
+		font-size: 1rem;
+	}
+
+}
+
+
+.navbar .btn:hover {
+	margin: 2em 0 0 2em;
+	background-color: rgb(20,200,80);
+	border: none;
+}	
+
+/*~NAVBAR*/
+
+
+
+
+/*DIV1*/
+.ctm-div1 {
+	border: solid;
+	border-color: rgb(13, 46, 82);
+	border-radius: 15px;	
+	padding: 2em 2em 2em 2em;
+	margin: 2em;
+	margin-top: 2em;
+	margin-bottom: 2.5em;	
+	background: repeating-linear-gradient(to top, rgb(22, 9, 9), rgb(11, 11, 37), rgb(34, 13, 6), rgb(48, 9, 9));		
+}
+
+@media (max-width: 900px) {
+	
+	.ctm-div1 {
+		border: none;
+		border-radius: 0px;	
+		margin: 0em;
+		padding-top: 3em;
+		padding-bottom: 5em;
+	}
+
+}
+
+.ctm-div1 .ctm-pic {
+	margin-top: 0;
+	padding: 1em 0em 0em 0em;
+}
+
+@media (max-width: 900px) {
+	
+	.ctm-div1 .ctm-pic {
+		padding: 2em 0em 0em 2em;
+	}
+
+}
+
+.ctm-div1 .ctm-col {
+	padding: 4em 2em 0em 2em;
+}
+
+@media (max-width: 900px) {
+	
+	.ctm-div1 .ctm-col {
+		padding: 0em 1em 0em 2em;
+	}
+
+}
+
+.ctm-div1 .ctm-p1 {
+	font-size: 3rem;
+	color: white;
+	font-weight: 500;
+	padding: 0em 1em 1em 0em;
+}
+
+@media (max-width: 900px) {
+	
+	.ctm-div1 .ctm-p1 {
+		font-size: 1.6rem;
+	}
+
+}
+
+.ctm-div1 .btn {
+	font-size: 1.4rem;
+}
+
+.ctm-div1 .btn {
+	transition-property: transform; 
+	transition-duration: 0.2s;
+	transition-delay: 0.03s
+}
+
+.ctm-div1 .btn:hover {
+	background-color: rgb(20,200,80);
+	border: 0;
+	transform: translatey(-4px);
+	box-shadow:0px 8px 11px -2px rgba(0,0,0,.3);
+}	
+/*~DIV1*/

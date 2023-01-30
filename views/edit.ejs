@@ -1,0 +1,39 @@
+<% layout('layouts/boilerplate.ejs')%>
+
+    <style>
+        body{
+            background: white;
+        }
+    </style>
+
+	<div class="container">
+		<div class="m-3 p-3 justify-content-center ">
+            <form action="/edit/<%=Blog._id%>" method="POST" >
+                <h1 style="text-align: center">Edit Blog</h1>
+                <div class="form-group p-3">
+                    <label>Title</label>
+                    <input type="text" class="form-control" placeholder="Title" value="<%=Blog.title%>" name="title" required>
+                </div>
+
+                <div class="form-group p-3">
+                    <label>Body</label>
+                    <textarea class="form-control" name="body"><%=Blog.body%></textarea>
+                </div>
+
+                <div class="form-group p-3">
+                    <label>Image Link</label><br>
+                    <input type="text" name="link" class="form-control" value="<%=Blog.image.link%>">
+                </div>
+                <div class="form-group p-3">
+                    <label>Caption</label>
+                    <textarea class="form-control" name="caption"><%=Blog.image.caption%></textarea>
+                </div>
+
+                <div class="form-group m-2">
+                    <!-- <input type="submit" value="submit"> -->
+                    <button id="sub" class="btn btn-primary btn-block">Submit</button>
+                </div>
+
+            </form>
+		</div>
+	</div>

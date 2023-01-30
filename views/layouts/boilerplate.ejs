@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloGeeK</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- <link rel="stylesheet" href="/stylesheets/app.css"> -->
+
+    <link rel="shortcut icon" href="../images/blogeek.jpg" type="image/x-icon"/>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/stylesheet/Blogeek.css">
+
+    <style>
+        body {
+                font-family: 'Raleway', sans-serif;
+                background: repeating-linear-gradient(to top, rgb(21, 87, 75), rgb(42, 42, 84), rgb(25, 59, 19), rgb(100, 106, 16));		
+          }
+    </style>
+</head>
+
+<body>
+    
+    <!-- NAVABAR -->
+    <nav class="navbar navbar-expand-lg fixed-top py-1 py-lg-0 navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand ml-1" href="/">
+            <img src="../images/blogeek.jpg" class="pb-1" alt="Logo" style="width:35px; height:35px;">
+            <span style="color: rgb(0,191,255);">Blo</span>G<span style="color:rgb(0,255,127);">eeK</span>
+          </a>
+          <button class="navbar-toggler mr-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <section class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/read?page=0">Read</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <% if(!currentUser) {%>
+                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/register">Register</a>
+                    <% } else {%>
+                    <span class="nav-link" style="color: rgb(0,191,255);"><%=currentUser.username%></span>
+                    <a class="nav-link" href="/create">Create Your Own Blog!</a>
+                    <a class="nav-link" href="/myBlogs?page=0">My Blogs</a>
+                    <a class="nav-link" href="/register">Register</a>
+                    <a class="nav-link" href="/logout">Logout</a>
+                <% } %>
+                
+            </div>
+          </section>
+        </div>
+      </nav>
+      <div class="mt-5">
+        <div class="container">
+            <%- include('../partials/flash.ejs')%>
+        </div>
+        <%- body %>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
